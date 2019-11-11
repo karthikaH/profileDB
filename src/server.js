@@ -3,6 +3,8 @@ import cors from "cors";
 import { json, urlencoded } from "body-parser";
 import morgan from "morgan";
 
+import artRouter from "./resources/art/art.router";
+
 export const app = express();
 const port = 3000;
 
@@ -18,12 +20,7 @@ app.use(json());
 // morgon is a middleware that helps to log various things to console
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => res.send({ message: "hello" }));
-
-app.post("/", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
+app.use("/api/art", artRouter);
 
 export const start = async () => {
   try {
